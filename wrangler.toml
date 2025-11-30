@@ -7,4 +7,4 @@ pages_build_output_dir = ".open-next/assets"
 [[d1_databases]]
 binding = "DB"
 database_name = "headwatersai-db"
-database_id = ""
+database_id = "73937cb6-bc7e-4161-9ecc-486838a5097d"
