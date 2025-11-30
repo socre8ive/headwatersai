@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
+    "build:cloudflare": "npx @opennextjs/cloudflare build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "preview": "npx wrangler dev",
+    "deploy": "npm run build:cloudflare && npx wrangler deploy",
+    "cf-typegen": "npx wrangler types"
   },
   "dependencies": {
     "next": "16.0.6",
