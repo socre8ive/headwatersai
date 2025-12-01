@@ -1,5 +1,7 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { D1Database } from "@cloudflare/workers-types";
+
+// D1Database type is available from the generated worker-configuration.d.ts
+type D1Database = any;
 
 export interface Env {
   DB: D1Database;

@@ -34,21 +34,23 @@ export async function GET() {
          ORDER BY created_at DESC`
       )
       .bind(session.user.id)
-      .all<{
-        id: string;
-        name: string;
-        latitude: number;
-        longitude: number;
-        watershed_huc12: string | null;
-        address: string | null;
-        notes: string | null;
-        created_at: string;
-      }>();
+      .all() as {
+        results: {
+          id: string;
+          name: string;
+          latitude: number;
+          longitude: number;
+          watershed_huc12: string | null;
+          address: string | null;
+          notes: string | null;
+          created_at: string;
+        }[];
+      };
 
     return NextResponse.json({
       success: true,
       count: locations.results.length,
-      locations: locations.results.map((loc) => ({
+      locations: locations.results.map((loc: any) => ({
         id: loc.id,
         name: loc.name,
         latitude: loc.latitude,
@@ -90,7 +92,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
+    const body = await request.json() as {
+      name?: string;
+      latitude?: number;
+      longitude?: number;
+      watershedHuc12?: string;
+      address?: string;
+      notes?: string;
+    };
     const { name, latitude, longitude, watershedHuc12, address, notes } = body;
 
     if (!name || latitude === undefined || longitude === undefined) {
@@ -117,7 +126,7 @@ export async function POST(request: NextRequest) {
     const locationCount = await db
       .prepare("SELECT COUNT(*) as count FROM saved_locations WHERE user_id = ?")
       .bind(session.user.id)
-      .first<{ count: number }>();
+      .first() as { count: number } | null;
 
     const maxLocations =
       session.user.subscriptionTier === "free"

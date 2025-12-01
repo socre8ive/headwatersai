@@ -133,7 +133,7 @@ export default function ExplorePage() {
     try {
       const response = await fetch(`/api/watershed?lat=${lat}&lng=${lng}`);
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { watershed: any };
         setWatershed(data.watershed);
         return data.watershed;
       }
@@ -150,7 +150,7 @@ export default function ExplorePage() {
     try {
       const response = await fetch(`/api/gauges?huc=${huc8}&readings=true`);
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { gauges: any[] };
         setGauges(data.gauges);
       }
     } catch (error) {
@@ -165,7 +165,7 @@ export default function ExplorePage() {
     try {
       const response = await fetch(`/api/facilities?huc8=${huc8}`);
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { facilities: any[] };
         setFacilities(data.facilities);
       }
     } catch (error) {
@@ -186,12 +186,12 @@ export default function ExplorePage() {
       const weatherData: WeatherData = {};
 
       if (forecastRes.ok) {
-        const forecastData = await forecastRes.json();
+        const forecastData = await forecastRes.json() as { forecast: any };
         weatherData.forecast = forecastData.forecast;
       }
 
       if (alertsRes.ok) {
-        const alertsData = await alertsRes.json();
+        const alertsData = await alertsRes.json() as { alerts: any[] };
         weatherData.alerts = alertsData.alerts;
       }
 
@@ -210,7 +210,7 @@ export default function ExplorePage() {
         `/api/flowlines?west=${lng - delta}&south=${lat - delta}&east=${lng + delta}&north=${lat + delta}`
       );
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { flowlines: GeoJSON.FeatureCollection };
         setFlowlines(data.flowlines);
       }
     } catch (error) {

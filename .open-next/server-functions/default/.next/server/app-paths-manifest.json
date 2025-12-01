@@ -1,0 +1,21 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/auth/logout/route": "app/api/auth/logout/route.js",
+  "/api/auth/me/route": "app/api/auth/me/route.js",
+  "/api/auth/register/route": "app/api/auth/register/route.js",
+  "/api/facilities/route": "app/api/facilities/route.js",
+  "/api/flowlines/route": "app/api/flowlines/route.js",
+  "/api/gauges/route": "app/api/gauges/route.js",
+  "/api/locations/route": "app/api/locations/route.js",
+  "/api/watershed/route": "app/api/watershed/route.js",
+  "/api/weather/route": "app/api/weather/route.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/explore/page": "app/explore/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/register/page": "app/register/page.js"
+}

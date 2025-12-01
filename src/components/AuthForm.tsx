@@ -47,7 +47,7 @@ export default function AuthForm({ mode, onSuccess, onModeChange }: AuthFormProp
         body: JSON.stringify(body),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { error?: string };
 
       if (!response.ok) {
         throw new Error(data.error || "Authentication failed");

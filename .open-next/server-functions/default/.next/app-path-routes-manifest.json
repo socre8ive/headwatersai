@@ -1,0 +1,21 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/auth/login/route": "/api/auth/login",
+  "/api/auth/logout/route": "/api/auth/logout",
+  "/api/auth/me/route": "/api/auth/me",
+  "/api/auth/register/route": "/api/auth/register",
+  "/api/facilities/route": "/api/facilities",
+  "/api/flowlines/route": "/api/flowlines",
+  "/api/gauges/route": "/api/gauges",
+  "/api/locations/route": "/api/locations",
+  "/api/watershed/route": "/api/watershed",
+  "/api/weather/route": "/api/weather",
+  "/dashboard/page": "/dashboard",
+  "/explore/page": "/explore",
+  "/favicon.ico/route": "/favicon.ico",
+  "/login/page": "/login",
+  "/page": "/",
+  "/pricing/page": "/pricing",
+  "/register/page": "/register"
+}

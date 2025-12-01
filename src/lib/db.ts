@@ -1,4 +1,5 @@
-import { D1Database } from "@cloudflare/workers-types";
+// D1Database type is available from the generated worker-configuration.d.ts
+type D1Database = any;
 
 export interface CloudflareEnv {
   DB: D1Database;
@@ -13,7 +14,7 @@ export async function executeQuery<T>(
   query: string,
   params: unknown[] = []
 ): Promise<T[]> {
-  const result = await db.prepare(query).bind(...params).all<T>();
+  const result = await db.prepare(query).bind(...params).all() as { results: T[] };
   return result.results;
 }
 
@@ -21,7 +22,7 @@ export async function executeRun(
   db: D1Database,
   query: string,
   params: unknown[] = []
-): Promise<D1Result> {
+): Promise<any> {
   return await db.prepare(query).bind(...params).run();
 }
 
@@ -30,7 +31,7 @@ export async function executeFirst<T>(
   query: string,
   params: unknown[] = []
 ): Promise<T | null> {
-  return await db.prepare(query).bind(...params).first<T>();
+  return await db.prepare(query).bind(...params).first() as T | null;
 }
 
 export interface D1Result {

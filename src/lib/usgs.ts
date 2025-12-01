@@ -151,16 +151,18 @@ export async function fetchWatershedByPoint(
   const feature = data.features[0];
   const props = feature.properties;
 
+  const huc12Value = (props.huc12 || props.HUC12) as string;
+
   return {
-    huc12: props.huc12 || props.HUC12,
-    huc10: (props.huc12 || props.HUC12).substring(0, 10),
-    huc8: (props.huc12 || props.HUC12).substring(0, 8),
-    huc6: (props.huc12 || props.HUC12).substring(0, 6),
-    huc4: (props.huc12 || props.HUC12).substring(0, 4),
-    huc2: (props.huc12 || props.HUC12).substring(0, 2),
-    name: props.name || props.NAME,
-    areaSqKm: props.areasqkm || props.AREASQKM || 0,
-    states: props.states || props.STATES || "",
+    huc12: huc12Value,
+    huc10: huc12Value.substring(0, 10),
+    huc8: huc12Value.substring(0, 8),
+    huc6: huc12Value.substring(0, 6),
+    huc4: huc12Value.substring(0, 4),
+    huc2: huc12Value.substring(0, 2),
+    name: (props.name || props.NAME) as string,
+    areaSqKm: (props.areasqkm || props.AREASQKM || 0) as number,
+    states: (props.states || props.STATES || "") as string,
     centroidLat: latitude,
     centroidLng: longitude,
     boundaryGeoJson: feature.geometry,
@@ -185,16 +187,18 @@ export async function fetchWatershedByHuc12(huc12: string): Promise<WatershedBou
   const props = feature.properties;
   const centroid = calculateCentroid(feature.geometry);
 
+  const huc12Value = (props.huc12 || props.HUC12) as string;
+
   return {
-    huc12: props.huc12 || props.HUC12,
-    huc10: (props.huc12 || props.HUC12).substring(0, 10),
-    huc8: (props.huc12 || props.HUC12).substring(0, 8),
-    huc6: (props.huc12 || props.HUC12).substring(0, 6),
-    huc4: (props.huc12 || props.HUC12).substring(0, 4),
-    huc2: (props.huc12 || props.HUC12).substring(0, 2),
-    name: props.name || props.NAME,
-    areaSqKm: props.areasqkm || props.AREASQKM || 0,
-    states: props.states || props.STATES || "",
+    huc12: huc12Value,
+    huc10: huc12Value.substring(0, 10),
+    huc8: huc12Value.substring(0, 8),
+    huc6: huc12Value.substring(0, 6),
+    huc4: huc12Value.substring(0, 4),
+    huc2: huc12Value.substring(0, 2),
+    name: (props.name || props.NAME) as string,
+    areaSqKm: (props.areasqkm || props.AREASQKM || 0) as number,
+    states: (props.states || props.STATES || "") as string,
     centroidLat: centroid.lat,
     centroidLng: centroid.lng,
     boundaryGeoJson: feature.geometry,

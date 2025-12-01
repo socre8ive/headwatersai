@@ -58,7 +58,7 @@ export default function SearchBox({
         throw new Error("Geocoding failed");
       }
 
-      const data = await response.json();
+      const data = await response.json() as { features: any[] };
 
       const searchResults: SearchResult[] = data.features.map(
         (feature: {

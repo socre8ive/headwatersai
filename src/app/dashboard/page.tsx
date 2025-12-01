@@ -51,19 +51,19 @@ export default function DashboardPage() {
           router.push("/login");
           return;
         }
-        const userData = await userRes.json();
+        const userData = await userRes.json() as { user: any };
         setUser(userData.user);
 
         const locationsRes = await fetch("/api/locations");
         if (locationsRes.ok) {
-          const locationsData = await locationsRes.json();
+          const locationsData = await locationsRes.json() as { locations: any[] };
           setLocations(locationsData.locations);
         }
 
         if (userData.user.subscriptionTier !== "free") {
           const alertsRes = await fetch("/api/alerts");
           if (alertsRes.ok) {
-            const alertsData = await alertsRes.json();
+            const alertsData = await alertsRes.json() as { alerts: any[] };
             setAlerts(alertsData.alerts);
           }
         }

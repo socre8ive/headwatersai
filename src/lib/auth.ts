@@ -1,4 +1,5 @@
-import { D1Database } from "@cloudflare/workers-types";
+// D1Database type is available from the generated worker-configuration.d.ts
+type D1Database = any; // Temporary fix for build
 import { generateId, getCurrentTimestamp } from "./db";
 
 const SALT_ROUNDS = 10;
@@ -122,7 +123,7 @@ export async function authenticateUser(
        FROM users WHERE email = ?`
     )
     .bind(email.toLowerCase())
-    .first<{
+    .first() as {
       id: string;
       email: string;
       password_hash: string;
@@ -132,7 +133,7 @@ export async function authenticateUser(
       stripe_subscription_id: string | null;
       created_at: string;
       updated_at: string;
-    }>();
+    } | null;
 
   if (!row) {
     return { success: false, error: "Invalid email or password" };
@@ -196,7 +197,7 @@ export async function validateSession(
        WHERE s.id = ?`
     )
     .bind(sessionId)
-    .first<{
+    .first() as {
       session_id: string;
       user_id: string;
       expires_at: string;
@@ -209,7 +210,7 @@ export async function validateSession(
       stripe_subscription_id: string | null;
       created_at: string;
       updated_at: string;
-    }>();
+    } | null;
 
   if (!row) {
     return null;
@@ -259,7 +260,7 @@ export async function updateUserPassword(
   const row = await db
     .prepare("SELECT password_hash FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ password_hash: string }>();
+    .first() as { password_hash: string } | null;
 
   if (!row) {
     return { success: false, error: "User not found" };
@@ -353,7 +354,7 @@ export async function getUserById(db: D1Database, userId: string): Promise<User 
        FROM users WHERE id = ?`
     )
     .bind(userId)
-    .first<{
+    .first() as {
       id: string;
       email: string;
       full_name: string | null;
@@ -362,7 +363,7 @@ export async function getUserById(db: D1Database, userId: string): Promise<User 
       stripe_subscription_id: string | null;
       created_at: string;
       updated_at: string;
-    }>();
+    } | null;
 
   if (!row) {
     return null;
@@ -388,7 +389,7 @@ export async function getUserByEmail(db: D1Database, email: string): Promise<Use
        FROM users WHERE email = ?`
     )
     .bind(email.toLowerCase())
-    .first<{
+    .first() as {
       id: string;
       email: string;
       full_name: string | null;
@@ -397,7 +398,7 @@ export async function getUserByEmail(db: D1Database, email: string): Promise<Use
       stripe_subscription_id: string | null;
       created_at: string;
       updated_at: string;
-    }>();
+    } | null;
 
   if (!row) {
     return null;

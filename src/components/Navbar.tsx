@@ -24,7 +24,7 @@ export default function Navbar() {
       try {
         const response = await fetch("/api/auth/me");
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.json() as { user: any };
           setUser(data.user);
         }
       } catch (error) {
